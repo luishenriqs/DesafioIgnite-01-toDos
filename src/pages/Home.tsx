@@ -11,18 +11,32 @@ interface Task {
 }
 
 export function Home() {
-  // const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
+  //DONE - add new task if it's not empty
   function handleAddTask(newTaskTitle: string) {
-    //TODO - add new task if it's not empty
-  }
+    const newTask = {
+      id: new Date().getTime(),
+      title: newTaskTitle,
+      done: false,
+    };
+    if (newTaskTitle) setTasks([...tasks, newTask]);
+  };
 
+  //DONE - mark task as done if exists
   function handleMarkTaskAsDone(id: number) {
-    //TODO - mark task as done if exists
+    const taskDone = tasks.find(task => task.id === id);
+    if (taskDone) {
+      taskDone.done === true ? taskDone.done = false : taskDone.done = true;
+      const updatedTasks = tasks.filter(task => task.id !== id);
+      setTasks([...updatedTasks, taskDone])
+    }
   }
 
+  //DONE - remove task from state
   function handleRemoveTask(id: number) {
-    //TODO - remove task from state
+    const updatedTasks = tasks.filter(task => task.id !== id);
+    setTasks(updatedTasks);
   }
 
   return (
@@ -35,6 +49,7 @@ export function Home() {
         tasks={tasks} 
         onPress={handleMarkTaskAsDone} 
         onLongPress={handleRemoveTask} 
+        
       />
     </>
   )

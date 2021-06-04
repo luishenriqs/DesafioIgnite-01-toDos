@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FlatList, TouchableOpacity, View, Text, StyleSheet, FlatListProps } from 'react-native';
 
 function FlatListHeaderComponent() {
@@ -27,16 +27,21 @@ export function MyTasksList({ tasks, onLongPress, onPress }: MyTasksListProps) {
       renderItem={({ item, index }) => {
         return (
           <TouchableOpacity
+            //DONE - use onPress, onLongPress and style props
             testID={`button-${index}`}
             activeOpacity={0.7}
-            //TODO - use onPress, onLongPress and style props
+            style={item.done ? styles.taskButtonDone : styles.taskButton}
+            onPress={() => onPress(item.id)}
+            onLongPress={() => onLongPress(item.id)}
           >
             <View 
+              //DONE - use style prop 
               testID={`marker-${index}`}
-              //TODO - use style prop 
+              style={item.done ? styles.taskMarkerDone : styles.taskMarker}
             />
-            <Text 
-              //TODO - use style prop
+            <Text
+              //DONE - use style prop
+              style={item.done ? styles.taskTextDone : styles.taskText}
             >
               {item.title}
             </Text>
@@ -57,10 +62,11 @@ export function MyTasksList({ tasks, onLongPress, onPress }: MyTasksListProps) {
 
 const styles = StyleSheet.create({
   header: {
-    color: '#3D3D4D',
+    color: '#fff',
     fontSize: 24,
     fontFamily: 'Poppins-SemiBold'
   },
+  
   taskButton: {
     flex: 1,
     paddingHorizontal: 10,
@@ -69,17 +75,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center'
-  },
-  taskMarker: {
-    height: 16,
-    width: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#3D3D4D',
-    marginRight: 10
-  },
-  taskText: {
-    color: '#3D3D4D',
   },
   taskButtonDone: {
     flex: 1,
@@ -91,15 +86,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
+
+  taskMarker: {
+    height: 16,
+    width: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#fff',
+    marginRight: 10
+  },
   taskMarkerDone: {
     height: 16,
     width: 16,
     borderRadius: 8,
-    backgroundColor: '#273FAD',
+    backgroundColor: '#273fad',
     marginRight: 10
   },
+
+  taskText: {
+    color: '#fff',
+  },
   taskTextDone: {
-    color: '#A09CB1',
+    color: '#ff0',
     textDecorationLine: 'line-through'
   }
 })
