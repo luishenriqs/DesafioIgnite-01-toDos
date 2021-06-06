@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FlatList, TouchableOpacity, View, Text, StyleSheet, FlatListProps } from 'react-native';
 
 function FlatListHeaderComponent() {
@@ -37,11 +37,11 @@ export function MyTasksList({ tasks, onLongPress, onPress }: MyTasksListProps) {
             <View 
               //DONE - use style prop 
               testID={`marker-${index}`}
-              style={item.done ? styles.taskMarkerDone : styles.taskMarker}
+              style={!!item.done ? styles.taskMarkerDone : styles.taskMarker}
             />
             <Text
               //DONE - use style prop
-              style={item.done ? styles.taskTextDone : styles.taskText}
+              style={!!item.done ? styles.taskTextDone : styles.taskText}
             >
               {item.title}
             </Text>
@@ -50,7 +50,13 @@ export function MyTasksList({ tasks, onLongPress, onPress }: MyTasksListProps) {
       }}
       ListHeaderComponent={<FlatListHeaderComponent />}
       ListHeaderComponentStyle={{
-        marginBottom: 20
+        marginBottom: 20,
+        borderRadius: 8,
+        borderWidth: 1,
+        height: 40,
+        width: 200,
+        alignItems: 'center',
+        backgroundColor: '#d3d3d4',
       }}
       style={{
         marginHorizontal: 24,
@@ -92,22 +98,22 @@ const styles = StyleSheet.create({
     width: 16,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#3D3D4D',
     marginRight: 10
   },
   taskMarkerDone: {
     height: 16,
     width: 16,
     borderRadius: 8,
-    backgroundColor: '#273fad',
+    backgroundColor: '#273FAD',
     marginRight: 10
   },
 
   taskText: {
-    color: '#fff',
+    color: '#3D3D4D',
   },
   taskTextDone: {
-    color: '#ff0',
+    color: '#A09CB1',
     textDecorationLine: 'line-through'
   }
 })

@@ -25,11 +25,11 @@ export function Home() {
 
   //DONE - mark task as done if exists
   function handleMarkTaskAsDone(id: number) {
-    const taskDone = tasks.find(task => task.id === id);
-    if (taskDone) {
-      taskDone.done === true ? taskDone.done = false : taskDone.done = true;
-      const updatedTasks = tasks.filter(task => task.id !== id);
-      setTasks([...updatedTasks, taskDone])
+    const taskToDo = tasks.find(task => task.id === id);
+    if (!!taskToDo) {
+      taskToDo.done === true ? taskToDo.done = false : taskToDo.done = true;
+      const oldTasks = tasks.filter(task => task.id !== id);
+      setTasks([...oldTasks, taskToDo])
     }
   }
 
@@ -49,7 +49,6 @@ export function Home() {
         tasks={tasks} 
         onPress={handleMarkTaskAsDone} 
         onLongPress={handleRemoveTask} 
-        
       />
     </>
   )

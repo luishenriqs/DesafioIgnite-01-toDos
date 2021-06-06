@@ -11,28 +11,28 @@ export function TodoInput({ addTask }: TodoInputProps) {
   const [task, setTask] = useState('');
 
   function handleAddNewTask(task: string) {
+    //DONE - Call addTask and clean input value 
     addTask(task)
     setTask('')
-    //TODO - Call addTask and clean input value 
   }
 
   return (
     <View style={[styles.inputContainer, Platform.OS === 'ios' ? styles.inputIOSShadow : styles.inputAndroidShadow]}>
       <TextInput 
+        //DONE - use value, onChangeText and onSubmitEditing props
         style={styles.input} 
         placeholder="Adicionar novo todo..."
         returnKeyType="send"
         value={task}
         onChangeText={setTask}
-        onSubmitEditing={() => handleAddNewTask}
-        //TODO - use value, onChangeText and onSubmitEditing props
+        onSubmitEditing={() => handleAddNewTask(task)}
       />
       <TouchableOpacity
+        //DONE - onPress prop
         testID="add-new-task-button"
         activeOpacity={0.7}
         style={styles.addButton}
         onPress={() => handleAddNewTask(task)}
-        //TODO - onPress prop
       >
         <Image source={checkIcon} />
       </TouchableOpacity>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    backgroundColor: '#F5F4F8',
+    backgroundColor: '#b5b5b5',
     color: '#000',
     paddingLeft: 12,
     borderTopLeftRadius: 5,
